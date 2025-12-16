@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head><title>🔥1元VIP特惠</title></head>
+<body style="text-align:center;padding:50px;font-family:Arial;background:linear-gradient(45deg,#ff6b6b,#4ecdc4);color:white;">
+    <h1 style="font-size:3em;text-shadow:2px 2px 4px rgba(0,0,0,0.3);">🎁 新用户特惠</h1>
+    <h2 style="font-size:2.5em;">仅需<span style="color:#ffd700;font-size:1.2em;animation:blink 1s infinite;">¥1</span>解锁VIP</h2>
+    <p style="font-size:24px;">扫码支付 → 立即获得永久会员 + 专属福利</p>
+    <br><br>
+    
+    <!-- YOUR MONEY MAKER -->
+    <img id="qrcode" src="https://imgur.com/a/CSaz9Ecamount=1.00" style="width:350px;height:350px;border:8px solid #ffd700;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+    <br><br>
+    <p style="font-size:22px;">💰 扫码支付 → 自动到账</p>
+    
+    <!-- 🔥 YOUR SECRET CONTROL PANEL -->
+    <div style="margin-top:40px;padding:20px;background:rgba(255,255,255,0.2);border-radius:15px;">
+        <h3>🎛️ 老板控制面板 (实时改价)</h3>
+        <input id="newprice" placeholder="新价格 ¥9.99" style="padding:15px;font-size:20px;width:200px;border-radius:10px;border:none;">
+        <button onclick="updatePrice()" style="padding:15px 30px;font-size:20px;background:#ffd700;color:#333;border:none;border-radius:10px;margin-left:10px;cursor:pointer;">🚀 更新所有二维码</button>
+        <p id="status" style="margin-top:15px;font-size:18px;"></p>
+    </div>
+    
+    <style>
+    @keyframes blink { 50% { opacity: 0.3; } }
+    </style>
+    
+    <script>
+    let currentPrice = 1.00;
+    
+    // Auto-change every 30s (1→9.99→99.99)
+    setInterval(() => {
+        let prices = [1.00, 9.99, 19.99, 99.99];
+        currentPrice = prices[(Math.floor(Math.random()*prices.length))];
+        updateQR(currentPrice);
+    }, 30000);
+    
+    function updatePrice() {
+        let price = document.getElementById('newprice').value || 9.99;
+        updateQR(price);
+        document.getElementById('status').innerHTML = `✅ 价格已更新为 ¥${price} - 所有用户扫码支付此金额！`;
+        document.querySelector('h2').innerHTML = `仅需<span style="color:#ffd700;font-size:1.2em;animation:blink 1s infinite;">¥${price}</span>解锁VIP`;
+    }
+    
+    function updateQR(price) {
+        document.getElementById('qrcode').src = `https://qr.lianlianpay.com/YOUR_MERCHANT_ID?amount=${price}`;
+        document.querySelector('h2').innerHTML = `仅需<span style="color:#ffd700;font-size:1.2em;animation:blink 1s infinite;">¥${price}</span>解锁VIP`;
+    }
+    
+    // Show current price
+    document.getElementById('status').innerHTML = '🔥 系统就绪 - 输入价格点击更新';
+    </script>
+</body>
+</html>
